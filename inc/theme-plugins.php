@@ -12,14 +12,6 @@ function theme_plugin_dependencies($checkonly = null) {
 			'name' => '<a href="https://www.advancedcustomfields.com/" target="_blank">Advanced Custom Fields</a>',
 			'slug' => 'advanced-custom-fields'
 		),
-		'contact-form-7/wp-contact-form-7.php' => array(
-			'name' => '<a href="https://wordpress.org/plugins/contact-form-7/" target="_blank">Contact Form 7</a>',
-			'slug' => 'contact-form-7'
-        ),
-		'wordpress-seo/wp-seo.php' => array(
-			'name' => '<a href="https://wordpress.org/plugins/wordpress-seo/" target="_blank">Yoast SEO</a>',
-			'slug' => 'wordpress-seo'
-		),
 		'timber-library/timber.php' => array(
 			'name' => '<a href="https://wordpress.org/plugins/timber-library/" target="_blank">Timber</a>',
 			'slug' => 'timber-library'
