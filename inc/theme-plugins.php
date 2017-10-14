@@ -1,5 +1,4 @@
 <?php
-
 /*-----------------------------------------------------------------------------------*/
 /* Required Plugins
 /*-----------------------------------------------------------------------------------*/
@@ -8,14 +7,8 @@ function theme_plugin_dependencies($checkonly = null) {
 	$theme = wp_get_theme();
 	$format = '<div class="notice notice-error"><p>Theme required plugin %s: %s</p></div>';
 	$plugins = array(
-		'advanced-custom-fields/acf.php' => array(
-			'name' => '<a href="https://www.advancedcustomfields.com/" target="_blank">Advanced Custom Fields</a>',
-			'slug' => 'advanced-custom-fields'
-		),
-		'timber-library/timber.php' => array(
-			'name' => '<a href="https://wordpress.org/plugins/timber-library/" target="_blank">Timber</a>',
-			'slug' => 'timber-library'
-		)
+		'advanced-custom-fields/acf.php' => array( 'name' => '<a href="https://www.advancedcustomfields.com/" target="_blank">Advanced Custom Fields</a>', 'slug' => 'advanced-custom-fields'),
+		'timber-library/timber.php' => array( 'name' => '<a href="https://wordpress.org/plugins/timber-library/" target="_blank">Timber</a>', 'slug' => 'timber-library' )
 	);
 
 	$out = '';
