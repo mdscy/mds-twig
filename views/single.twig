@@ -1,0 +1,20 @@
+{% extends "base.twig" %}
+{% block content %}
+    <div class="type-{{ post.post_type }}">
+        <h1 class="entry-title">{{ post.title }}</h1>
+        <div class="entry-meta">
+            <span class="updated">{{ post.post_date|date }}</span>
+        </div>
+        <div class="entry-content">{{ post.content }}</div>
+        {% if comment_form %}
+            <div class="comments">
+                <div class="respond">{{ comment_form }}</div>
+                <div class="responses">
+                    {% for cmt in post.get_comments() %}
+                        {% include "comment.twig" with {comment:cmt} %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
