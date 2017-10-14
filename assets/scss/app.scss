@@ -1,0 +1,25 @@
+/*!
+Theme Name: MDS Twig
+Theme URI: https://github.com/mdscy/mds-twig
+Author: MDS
+Author URI: http://www.mds.com.cy
+Description: Underscore Theme, SASS, Twig and Basscss
+Version: 1.1.0
+Text Domain: mdstwig
+*/
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Normalize
+# Basscss
+# Website
+--------------------------------------------------------------*/
+
+@charset "UTF-8";
+@import 'normalize';
+@import 'basscss';
+@import 'defaults';
+@import 'helpers';
+@import 'general';
+@import 'forms';
