@@ -136,90 +136,10 @@ if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
 /*-----------------------------------------------------------------------------------*/
-/* Cleanup the WP Head
+/* Includes
 /*-----------------------------------------------------------------------------------*/
 
-function clear_head () {
-    remove_action('wp_head', 'wp_generator');
-    remove_action('wp_head', 'wlwmanifest_link');
-    remove_action('wp_head', 'rsd_link');
-    remove_action('wp_head', 'wp_shortlink_wp_head');
-    remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10);
-    add_filter('the_generator', '__return_false');
-    add_filter('show_admin_bar','__return_false');
-    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-    remove_action( 'wp_print_styles', 'print_emoji_styles' );
-}
-add_action('after_setup_theme', 'clear_head');
-
-/*-----------------------------------------------------------------------------------*/
-/* Timber Settings
-/*-----------------------------------------------------------------------------------*/
-
-add_filter('timber_context', 'add_to_context');
-function add_to_context($data){
-
-  $data['menu'] = new TimberMenu();
-  $data['categories'] = Timber::get_terms('category', 'show_count=0&title_li=&hide_empty=0&exclude=1');
-  return $data;
-}
-/*-----------------------------------------------------------------------------------*/
-/* Register Navigation Menus
-/*-----------------------------------------------------------------------------------*/
-function navigation_menus() {
-    
-        $locations = array(
-            'Header Menu' => __( 'Header Menu', 'text_domain' ),
-            'Mobile Menu' => __( 'Mobile Menu', 'text_domain' ),
-            'Footer Company Menu' => __( 'Footer Company Menu', 'text_domain' ),
-            'Footer Support Menu' => __( 'Footer Support Menu', 'text_domain' ),
-        );
-        register_nav_menus( $locations );
-    
-    }
-	add_action( 'init', 'navigation_menus' );
-/*-----------------------------------------------------------------------------------*/
-/* Required Plugins
-/*-----------------------------------------------------------------------------------*/
-add_action('admin_notices', 'theme_plugin_dependencies');
-function theme_plugin_dependencies($checkonly = null) {
-	$theme = wp_get_theme();
-	$author = ($theme && $theme->exists() && $theme['author']) ? $theme['author'] : 'your Wordpress-theme developer';
-	$format = '<div class="notice notice-error"><p>Theme-warning required plugin %s: %s</p></div>';
-
-	$plugins = array(
-		'advanced-custom-fields/acf.php' => array(
-			'name' => '<a href="https://www.advancedcustomfields.com/" target="_blank">Advanced Custom Fields</a>',
-			'slug' => 'advanced-custom-fields'
-		),
-		'contact-form-7/wp-contact-form-7.php' => array(
-			'name' => '<a href="https://wordpress.org/plugins/contact-form-7/" target="_blank">Contact Form 7</a>',
-			'slug' => 'contact-form-7'
-        ),
-		'wordpress-seo/wp-seo.php' => array(
-			'name' => '<a href="https://wordpress.org/plugins/wordpress-seo/" target="_blank">Yoast SEO</a>',
-			'slug' => 'wordpress-seo'
-		),
-		'timber-library/timber.php' => array(
-			'name' => '<a href="https://wordpress.org/plugins/timber-library/" target="_blank">Timber</a>',
-			'slug' => 'timber-library'
-		)
-	);
-
-	$out = '';
-	foreach ($plugins as $plugin => $nfo) {
-		if (is_wp_error(validate_plugin($plugin))) {
-			if (!$nfo['slug']) {
-				$out .= sprintf($format, $nfo['name'], "Please contact $author for installation instructions.");
-			} else {
-				$link = wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=' . $nfo['slug']), 'install-plugin_' . $nfo['slug']);
-				$out .= sprintf($format, $nfo['name'], "Please <a href='$link'>install</a> this Plugin.");
-			}
-		} elseif (is_plugin_inactive($plugin)) {
-			$link = wp_nonce_url('plugins.php?action=activate&amp;plugin=' . urlencode($plugin), 'activate-plugin_' . $plugin);
-			$out .= sprintf($format, $nfo['name'], "Please <a href='$link'>activate</a> this Plugin.");
-		}
-	}
-	if ($checkonly) return $out != '';
-	echo $out;
-}
+require get_template_directory() . '/inc/headcleanup.php';
+require get_template_directory() . '/inc/theme-plugins.php';
+require get_template_directory() . '/inc/registered-menus.php';
+require get_template_directory() . '/inc/timber.php';
